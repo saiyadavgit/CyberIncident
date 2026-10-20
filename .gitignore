@@ -1,0 +1,33 @@
+# Environment & Credential files
+.env
+.env.*
+*.env
+
+# IDE & OS files
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Dependencies and build output
+node_modules/
+dist/
+build/
+target/
+
+# Backend uploads and generated files
+backend/uploads/
+*.log
+
+# Ignore old frontend backup if present
+frontend-old-backup/
+
+
+# Local backup archives
+backend.zip
+
+# Backend secrets
+backend/src/main/resources/application.properties
+backend/src/test/resources/
+

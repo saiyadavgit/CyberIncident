@@ -1,0 +1,36 @@
+# Maven build output
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# IDE & Editor files
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# Environment files & Secrets
+.env
+.env.*
+*.env
+application-local.properties
+secrets.properties
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Uploaded files - keep user data out of Git
+/uploads/
+
+# Local configuration and credentials
+application.properties
+application-*.properties
+!application.properties.example
+
+# Logs
+*.log
+
+# Build output
+target/
