@@ -1,0 +1,22 @@
+server.port=${PORT:8080}
+
+spring.application.name=Cyber Incident Management Backend
+
+spring.datasource.url=${DB_URL}
+spring.datasource.username=${DB_USERNAME}
+spring.datasource.password=${DB_PASSWORD}
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=false
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
+jwt.secret=${JWT_SECRET}
+jwt.expiration=${JWT_EXPIRATION:86400000}
+
+spring.servlet.multipart.max-file-size=10MB
+spring.servlet.multipart.max-request-size=10MB
+
+groq.api.key=${GROQ_API_KEY}
+groq.api.url=${GROQ_API_URL:https://api.groq.com/openai/v1/chat/completions}
+groq.model=${GROQ_MODEL:openai/gpt-oss-120b}
