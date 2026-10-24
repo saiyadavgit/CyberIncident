@@ -1,4 +1,3 @@
-```java
 package com.cyberincident.backend.config;
 
 import com.cyberincident.backend.security.JwtAuthenticationFilter;
@@ -123,4 +122,3 @@ public class SecurityConfig {
         return source;
     }
 }
-```
