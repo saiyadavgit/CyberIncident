@@ -1,3 +1,4 @@
+```java
 package com.cyberincident.backend.config;
 
 import com.cyberincident.backend.security.JwtAuthenticationFilter;
@@ -31,26 +32,19 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
         http
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-
             .csrf(AbstractHttpConfigurer::disable)
-
             .sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
-
             .exceptionHandling(exception -> exception
                 .authenticationEntryPoint(authenticationEntryPoint())
                 .accessDeniedHandler(accessDeniedHandler())
             )
-
             .headers(headers -> headers
                 .contentTypeOptions(contentTypeOptions -> {})
-                .frameOptions(frameOptions ->
-                    frameOptions.deny()
-                )
+                .frameOptions(frameOptions -> frameOptions.deny())
                 .referrerPolicy(referrerPolicy ->
                     referrerPolicy.policy(
                         org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter.ReferrerPolicy.NO_REFERRER
@@ -62,7 +56,6 @@ public class SecurityConfig {
                     )
                 )
             )
-
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers("/api/auth/**", "/api/health").permitAll()
@@ -71,7 +64,6 @@ public class SecurityConfig {
                 .requestMatchers("/api/employee/**").hasAnyRole("EMPLOYEE", "ANALYST", "ADMIN")
                 .anyRequest().authenticated()
             )
-
             .addFilterBefore(
                 jwtAuthFilter,
                 UsernamePasswordAuthenticationFilter.class
@@ -82,9 +74,7 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationEntryPoint authenticationEntryPoint() {
-
         return (request, response, authException) -> {
-
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
             response.getWriter().write(
@@ -95,9 +85,7 @@ public class SecurityConfig {
 
     @Bean
     public AccessDeniedHandler accessDeniedHandler() {
-
         return (request, response, accessDeniedException) -> {
-
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.setContentType("application/json");
             response.getWriter().write(
@@ -108,11 +96,13 @@ public class SecurityConfig {
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(
-            List.of("http://localhost:5173")
+        configuration.setAllowedOriginPatterns(
+            List.of(
+                "http://localhost:5173",
+                "https://*.vercel.app"
+            )
         );
 
         configuration.setAllowedMethods(
@@ -126,10 +116,11 @@ public class SecurityConfig {
         configuration.setAllowCredentials(false);
 
         UrlBasedCorsConfigurationSource source =
-                new UrlBasedCorsConfigurationSource();
+            new UrlBasedCorsConfigurationSource();
 
         source.registerCorsConfiguration("/**", configuration);
 
         return source;
     }
 }
+```
